@@ -1,0 +1,12 @@
+{
+  "name": "mock-api",
+  "version": "1.0.0",
+  "description": "mock backend based on json-server for popup box",
+  "main": "index.js",
+  "dependencies": {
+    "json-server": "^0.12.2"
+  },
+  "scripts": {
+    "start": "json-server --watch db.json --delay 0 --port 4000 --static ./public"
+  }
+}

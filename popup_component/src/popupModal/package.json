@@ -1,0 +1,6 @@
+{
+    "name": "PopupModal",
+    "version": "0.0.1",
+    "private": true,
+    "main": "./popupParent.js"
+  }
