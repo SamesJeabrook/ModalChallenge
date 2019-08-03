@@ -1,0 +1,65 @@
+@import '~styles/color-variables.less';
+@import '~styles/mixins.less';
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    font-size: 12px;
+}
+
+.header, .footer{
+    min-height: 60px;
+    background-color:@primary-color;
+    color: @white;
+}
+
+.header-title{
+    font-size: 15px;
+    margin: 0;
+    padding: 20px;
+}
+
+.content{
+    margin: 20px;
+}
+
+
+// can move to button component partials
+.button{
+    padding: 10px 20px;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+}
+
+.button_default{
+    .btn-variant(@secondary-color)
+}
+
+.button_primary{
+    .btn-variant(@primary-color);
+}
+
+.button_success{
+    .btn-variant(@success-color);
+}
+
+.action-buttons-wrapper{
+    display: flex;
+    .button{
+        margin: 0 20px;
+    }
+}
+
+.note{
+    font-size: 12px;
+    opacity: 1;
+    transition: opacity 0.15s linear;
+    &.hide{
+        opacity: 0;
+    }
+}
+
+.fa-check-circle path{
+    fill: @success-color;
+}

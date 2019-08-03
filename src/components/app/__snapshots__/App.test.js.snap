@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validate App component 1`] = `
+<div>
+  <header
+    className="header"
+  >
+    <h1
+      className="header-title"
+    >
+      Modal demos
+    </h1>
+  </header>
+  <div
+    className="content"
+  >
+    <div
+      className="action-buttons-wrapper"
+    >
+      <button
+        className="button button_primary"
+        onClick={[Function]}
+      >
+        Click me for modal
+      </button>
+      <button
+        className="button button_success"
+        onClick={[Function]}
+      >
+        Click me for Success modal
+      </button>
+    </div>
+  </div>
+</div>
+`;

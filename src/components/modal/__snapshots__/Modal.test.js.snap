@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validate Modal componet 1`] = `
+<div
+  className="modal  undefined"
+>
+  <section
+    className="modal-main  default"
+  >
+    <div
+      className="modal-header-wrap"
+    >
+      <h1
+        className="modal-title"
+      />
+    </div>
+    <div
+      className="modal-content"
+    />
+    <footer
+      className="modal-footer"
+    >
+      <button
+        className="button button_primary"
+        onClick={[Function]}
+      />
+    </footer>
+  </section>
+</div>
+`;
