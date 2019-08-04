@@ -1,111 +1,106 @@
 import React from "react";
+import { connect } from "react-redux";
 import "./app.less";
 import Modal from "../modal/Modal";
 import SampleMessage from "../SampleMessage";
 import SuccessMessage from "../successmessage/SuccessMessage";
+import {showModal} from "../../actions/modalActions";
 
-export default class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isDefaultModalOpen: false,
-      isSuccessModalOpen: false,
-      onCloseMessage: ""
-    };
-    this.closeModal = this.closeModal.bind(this);
-    this.reset = this.reset.bind(this);
-  }
-
-  openModal(modalName) {
-    const formattedModalName = `is${modalName}ModalOpen`;
-    this.setState({
-      [formattedModalName]: true
-    });
-  }
-
-  reset() {
-    this.setState({
-      onCloseMessage: ""
-    });
-  }
-
-  closeModal(values, modalName) {
-    const formattedModalName = `is${modalName}ModalOpen`;
-    this.setState({
-      [formattedModalName]: false,
-      onCloseMessage: values.message
-    });
-    if(values.message !== ''){
-        setTimeout(this.reset, 5000);
-    }
-  }
-
+class App extends React.PureComponent {
+  
   render() {
-    const {
-      isDefaultModalOpen,
-      isSuccessModalOpen,
-      onCloseMessage
-    } = this.state;
+    const { showModal, isModalOpen, innerModalProps } = this.props;
     const SUCCESS_MODAL = "Success";
     const DEFAULT_MODAL = "Default";
-    const hasCloseMessage = onCloseMessage !== "";
+
+    const successModalOptions = {
+      isModalOpen:isModalOpen,
+      modalSize:"small",
+      modalName:SUCCESS_MODAL,
+      modalTitle:"Success !",
+      closeButtonLabel:"Close",
+      canShowDefaultClose: false,
+      autoClose:true,
+      children:<SuccessMessage/>
+    }
+
+    const resolveModalOptions = {
+      isModalOpen,
+      modalSize:"large",
+      modalName:DEFAULT_MODAL,
+      modalTitle:"Welcome !",
+      closeButtonLabel:"Close",
+      canShowDefaultClose: false,
+      children:<SampleMessage />
+    }
+
+    const defaultModalOptions = {
+      isModalOpen,
+      modalSize:"small",
+      modalName:DEFAULT_MODAL,
+      modalTitle:"Hello",
+      closeButtonLabel:"Ok",
+      canShowDefaultClose: true,
+      children: "I am normal modal"
+    }
+
+    const hasDataFromModalComponent = innerModalProps && innerModalProps.message;
+    
     return (
       <div>
         <header className="header">
           <h1 className="header-title">Modal demos</h1>
         </header>
         <div className="content">
-          {
-           isDefaultModalOpen &&      
-          <Modal
-            isModalOpen={isDefaultModalOpen}
-            modalSize="larges"
-            modalName={DEFAULT_MODAL}
-            modalTitle="Welcome !"
-            closeButtonLabel="Close"
-            onClose={this.closeModal}
-            canPassDataOnClose={true}
-            children={<SampleMessage />}
-          />
-        }
-
-        {isSuccessModalOpen && 
-          <Modal
-            isModalOpen={isSuccessModalOpen}
-            modalName={SUCCESS_MODAL}
-            modalSize="small"
-            modalTitle="Success !"
-            closeButtonLabel="Close"
-            canPassDataOnClose={false}
-            onClose={this.closeModal}
-            autoClose={true}
-            children={<SuccessMessage />}
-          />
-        }
-
+          
           <div className="action-buttons-wrapper">
             <button
               className="button button_primary"
-              onClick={e => this.openModal(DEFAULT_MODAL)}
+              onClick={e => showModal(resolveModalOptions)}
             >
-              Click me for modal
+              Click me for modal which resolve
             </button>
+
             <button
               className="button button_success"
-              onClick={e => this.openModal(SUCCESS_MODAL)}
+              onClick={e => showModal(defaultModalOptions)}
             >
-              Click me for Success modal
+              Click me for normal modal
             </button>
+
+            <button
+              className="button button_success"
+              onClick={e => showModal(successModalOptions)}
+            >
+              Click me for success modal
+            </button>
+
+            {isModalOpen && (
+              <Modal/>
+            )}
           </div>
 
-          {hasCloseMessage && (
-            <p className={`note ${!hasCloseMessage ? "hide" : ""}`}>
-              {onCloseMessage}
+          {hasDataFromModalComponent && (
+            <p className={`note`}>
+              {innerModalProps.message}
             </p>
           )}
-          
         </div>
       </div>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  showModal: (modalProps) =>
+    dispatch(showModal({ modalProps })),
+});
+
+const mapStateToProps = state => ({
+  ...state.modal
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

@@ -21,13 +21,19 @@ exports[`Validate App component 1`] = `
         className="button button_primary"
         onClick={[Function]}
       >
-        Click me for modal
+        Click me for modal which resolve
       </button>
       <button
         className="button button_success"
         onClick={[Function]}
       >
-        Click me for Success modal
+        Click me for normal modal
+      </button>
+      <button
+        className="button button_success"
+        onClick={[Function]}
+      >
+        Click me for success modal
       </button>
     </div>
   </div>

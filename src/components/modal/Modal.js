@@ -1,53 +1,43 @@
 import React from "react";
 import "./modal.less";
 import { getModalSize } from "./getModalSize";
+import { connect } from "react-redux";
+import {hideModal} from "../../actions/modalActions";
 
-export default class Modal extends React.PureComponent {
-
-  constructor(props){
+class Modal extends React.PureComponent {
+  constructor(props) {
     super(props);
-    this.closeModal = this.closeModal.bind(this);
     this.onEscape = this.onEscape.bind(this);
   }
 
-  closeModal(){
-      const {
-        onClose,
-        modalName,
-        canPassDataOnClose,
-      } = this.props;
-      const onCloseValues = canPassDataOnClose ? {
-          message: 'You have closed welcome modal. Message from call back. I will hide in few seconds.'
-      } : {};
-    onClose && onClose(onCloseValues, modalName);
-  };
-
-  onEscape(event){
-    if(event.keyCode === 27) {
-      this.closeModal();
+  onEscape(event) {
+    const { closeModal } = this.props;
+    if (event.keyCode === 27) {
+      closeModal();
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     document.addEventListener("keydown", this.onEscape, false);
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     document.removeEventListener("keydown", this.onEscape, false);
   }
 
   render() {
+    const { isModalOpen, closeModal, modalProps } = this.props;
     const {
       children,
-      isModalOpen,
       closeButtonLabel,
       modalSize,
       modalTitle,
       modalName,
-      autoClose
-    } = this.props;
+      autoClose,
+      canShowDefaultClose
+    } = modalProps;
 
-    if(autoClose){
-      setTimeout(this.closeModal, 5000);
+    if (autoClose) {
+      setTimeout(closeModal, 5000);
     }
 
     const activeModalClassName = isModalOpen ? "show-modal" : "";
@@ -62,13 +52,33 @@ export default class Modal extends React.PureComponent {
           </div>
           <div className="modal-content">
             {children}
+            {canShowDefaultClose && (
+              <footer className="modal-footer">
+                <button className="button button_primary" onClick={closeModal}>
+                  {closeButtonLabel}
+                </button>
+              </footer>
+            )}
           </div>
-          { !autoClose && <footer className="modal-footer">
-            <button className="button button_primary" onClick={this.closeModal}>{closeButtonLabel}</button>
-          </footer>
-          }
         </section>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    ...state.modal
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    closeModal: () => dispatch(hideModal())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Modal);

@@ -16,15 +16,9 @@ exports[`validate Modal componet 1`] = `
     </div>
     <div
       className="modal-content"
-    />
-    <footer
-      className="modal-footer"
     >
-      <button
-        className="button button_primary"
-        onClick={[Function]}
-      />
-    </footer>
+      test
+    </div>
   </section>
 </div>
 `;
