@@ -19,7 +19,7 @@ We have provided a basic webpack configuration that can be run from using `yarn 
 
 ## Initial step
 
-type below commands on root directory, to install necessary packages.
+type below commands on root directory, to install necessary packages. Request you please delete node_modules and run below command for safe. Some reason, it is conflicting with exising node_modules. 
 
 ```npm install```
 
@@ -57,5 +57,5 @@ npm run test
 12. Another modal opens and display the content. On click of close button, can pass the message for call back. which will display in main page.
 13. By default, on escape modal close.
 14. Just placed button with different styles to open the modal.
-15. Surprised to see the node_modules checked in. However, I also checked in all node_modules. Would like to request please run npm install to just make sure.
+15. Surprised to see the node_modules checked in. However, I also checked in all node_modules. Would like to request please delete node_modules and run npm install to just make sure.
 
