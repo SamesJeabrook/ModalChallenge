@@ -1,36 +1,27 @@
-import { getModalSize } from "./getModalSize";
+import { getModalSize } from './getModalSize';
 
-describe('Get Modal size', function(){
+describe('Get Modal size', () => {
+	it('return modal size as small', () => {
+		// actual
+		const actual = getModalSize('small');
 
-    it('return modal size as small', function(){
+		// expect
+		expect(actual).toEqual('small');
+	});
 
-        // actual
-        const actual = getModalSize('small');
+	it('return modal size as large', () => {
+		// actual
+		const actual = getModalSize('large');
 
-        // expect
-        expect(actual).toEqual('small');
+		// expect
+		expect(actual).toEqual('large');
+	});
 
-    })
+	it('return modal size as default for other than small and large', () => {
+		// actual
+		const actual = getModalSize('largee');
 
-    it('return modal size as large', function(){
-
-        // actual
-        const actual = getModalSize('large');
-
-        // expect
-        expect(actual).toEqual('large');
-
-    })
-
-    it('return modal size as default for other than small and large', function(){
-
-        // actual
-        const actual = getModalSize('largee');
-
-        // expect
-        expect(actual).toEqual('default');
-
-    })
-
-
-})
+		// expect
+		expect(actual).toEqual('default');
+	});
+});

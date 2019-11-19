@@ -1,20 +1,14 @@
 
-export const showModal = ({modalProps}) => {
-    return {
-        type: 'SHOW_MODAL',
-        modalProps
-    }
-} 
+export const showModal = ({ modalProps }) => ({
+	type: 'SHOW_MODAL',
+	modalProps,
+});
 
-export const hideModal = () => {
-    return {
-        type: 'HIDE_MODAL'
-    }
-}
+export const hideModal = () => ({
+	type: 'HIDE_MODAL',
+});
 
-export const resolveModal = ({innerModalProps}) => {
-    return {
-        type: 'RESOLVE_MODAL',
-        innerModalProps
-    }
-}
+export const resolveModal = ({ innerModalProps }) => ({
+	type: 'RESOLVE_MODAL',
+	innerModalProps,
+});

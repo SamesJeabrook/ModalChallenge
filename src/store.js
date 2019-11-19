@@ -1,11 +1,14 @@
-import { createStore } from "redux";
-import rootReducers from "./reducer/root-reducers";
+import { createStore } from 'redux';
+import rootReducers from './reducer/root-reducers';
 
 
-export default function configureStore(){
+// export default function configureStore() {
+// 	return createStore(
+// 		rootReducers
+// 	);
+// }
 
-    return createStore(
-        rootReducers
-    )
+const store = createStore(rootReducers);
 
-}
+
+export default store;
